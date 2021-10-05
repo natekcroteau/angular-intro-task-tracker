@@ -13,7 +13,7 @@ export class ButtonComponent implements OnInit {
   color!: string; //accessing the 'prop' of color
 
   @Output()
-  btnClick = new EventEmitter() //custom output for reusable components, accessed in the html file as a 'prop'
+  btnClick = new EventEmitter() //custom event output for reusable components, accessed in the html file it is imported to, as a 'prop'
 
   constructor() { }
 
