@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TASKS } from '../../mock-tasks'
 import { Task } from '../../Task'
+import { TaskService } from '../../services/task.service'
 
 @Component({
   selector: 'app-tasks',
@@ -8,11 +8,12 @@ import { Task } from '../../Task'
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit {
-  tasks: Task[] = TASKS                         //bringing the tasks in to the tasks component and setting the type to Task[]
+  tasks: Task[] = [];                        //bringing the tasks in to the tasks component and setting the type to Task[]
 
-  constructor() { }
+  constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
+    this.taskService.getTasks().subscribe((tasks) => this.tasks = tasks);   //subscribe to watching for the observable task service
   }
 
 }
