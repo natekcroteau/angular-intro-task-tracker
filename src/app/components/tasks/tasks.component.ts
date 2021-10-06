@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Task } from '../../Task'
 import { TaskService } from '../../services/task.service'
 
@@ -13,7 +14,15 @@ export class TasksComponent implements OnInit {
   constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
-    this.taskService.getTasks().subscribe((tasks) => this.tasks = tasks);   //subscribe to watching for the observable task service
+    this.taskService
+      .getTasks()
+      .subscribe((tasks) => this.tasks = tasks);   //subscribe to watching for the observable task service
+  }
+
+  deleteTask(task: Task){
+    this.taskService
+      .deleteTask(task)
+      .subscribe(() => this.tasks = this.tasks.filter(t => t.id !== task.id));   //subscribe to deleteTask service and update the tasks to filter out the now deleted task by id
   }
 
 }
